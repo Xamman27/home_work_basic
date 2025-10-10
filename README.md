@@ -1,4 +1,4 @@
-## Домашние задания курса [OTUS «Golang Developer. Basic»](https://otus.ru/lessons/go-basic/)
+## Домашние задания курса [«Golang Developer. Basic»])
 1) «Установка Linux, Go, базовая настройка IDE»
 2) [«Чиним, собираем и запускаем приложение»](./hw02_fix_app)
 3) [«Шахматная доска»](./hw03_chessboard)
