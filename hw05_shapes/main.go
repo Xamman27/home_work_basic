@@ -6,48 +6,37 @@ import (
 	"math"
 )
 
-// Интерфейс Shape с методом Area
 type Shape interface {
 	Area() float64
 }
-
-// Структура Круг
 type Circle struct {
 	Radius float64
 }
 
-// Реализация метода Area для круга
+type Rectangle struct {
+	Width, Height float64
+}
+
+type Triangle struct {
+	Base, Height float64
+}
+
 func (c Circle) Area() float64 {
 	return math.Pi * c.Radius * c.Radius
 }
 
-// Структура Прямоугольник
-type Rectangle struct {
-	Width  float64
-	Height float64
-}
-
-// Реализация метода Area для прямоугольника
 func (r Rectangle) Area() float64 {
 	return r.Width * r.Height
 }
 
-// Структура Треугольник
-type Triangle struct {
-	Base   float64
-	Height float64
-}
-
-// Реализация метода Area для треугольника
 func (t Triangle) Area() float64 {
-	return 0.5 * t.Base * t.Height
+	return t.Base * t.Height * 0.5
 }
 
-// Функция для подсчета площади
-func calculateArea(s any) (float64, error) {
+func CalculateArea(s any) (float64, error) {
 	shape, ok := s.(Shape)
 	if !ok {
-		return 0, errors.New("переданный объект не является фигурой")
+		return 0, errors.New("Переданный объектт не является фигурой")
 	}
 	return shape.Area(), nil
 }
@@ -56,37 +45,40 @@ func main() {
 	c := Circle{Radius: 5}
 	r := Rectangle{Width: 10, Height: 5}
 	t := Triangle{Base: 8, Height: 6}
-	notShape := 123 // просто число, не фигура
+	notShape := 123
 
-	// Круг
-	area, err := calculateArea(c)
+	area, err := CalculateArea(c)
 	if err != nil {
-		fmt.Println("Ошибка:", err)
+		fmt.Println(err)
 	} else {
-		fmt.Printf("Круг: радиус %.0f Площадь: %v\n", c.Radius, area)
+		fmt.Println("Радиус круга %.0f, площадь %v\n", c.Radius, area)
 	}
 
-	// Прямоугольник
-	area, err = calculateArea(r)
+	area, err = CalculateArea(r)
 	if err != nil {
-		fmt.Println("Ошибка:", err)
+		fmt.Println(err)
 	} else {
-		fmt.Printf("Прямоугольник: ширина %.0f, высота %.0f Площадь: %v\n", r.Width, r.Height, area)
+		fmt.Println("Ширина  прямоугольника %.0f, высота %.0f, площадь %v\n", r.Width, r.Height, area)
 	}
 
-	// Треугольник
-	area, err = calculateArea(t)
+	area, err = CalculateArea(t)
 	if err != nil {
-		fmt.Println("Ошибка:", err)
+		fmt.Println(err)
 	} else {
-		fmt.Printf("Треугольник: основание %.0f, высота %.0f Площадь: %v\n", t.Base, t.Height, area)
+		fmt.Println("Основание  треугольника %.0f, высота %.0f, площадь %v\n", t.Height, t.Base, area)
 	}
 
-	// Не фигура
-	area, err = calculateArea(notShape)
+	area, err = CalculateArea(r)
 	if err != nil {
-		fmt.Println("Ошибка:", err)
+		fmt.Println(err)
 	} else {
-		fmt.Printf("Площадь: %v\n", area)
+		fmt.Println("Ширина  прямоугольника %.0f, высота %.0f, площадь %v\n", r.Width, r.Height, area)
+	}
+
+	area, err = CalculateArea(notShape)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Площадь %v\n", area)
 	}
 }
